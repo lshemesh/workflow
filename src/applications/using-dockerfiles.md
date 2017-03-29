@@ -122,6 +122,19 @@ Use `deis scale cmd=3` to increase `cmd` processes to 3, for example. Scaling a
 process type directly changes the number of [containers][container]
 running that process.
 
+## Docker Build Arguments Whitelisting
+
+If your app has a lot of environment variables then it's likely not worth injecting all of them into your build phase. Users
+can set whitelisted args that will be pulled from their app configuration and then injected into the docker build.
+
+$ deis config:set ARG1=VALUE1
+$ deis config:set ARG2=VALUE2
+$ deis config:set ARG3=VALUE3
+
+$ deis config:set DEIS_DOCKER_BUILD_ARGS=ARG1:ARG2
+
+The only build args available will be $ARG1 and $ARG2
+
 [container]: ../reference-guide/terms.md#container
 [controller]: ../understanding-workflow/components.md#controller
 [Dockerfile]: https://docs.docker.com/reference/builder/
